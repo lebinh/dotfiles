@@ -1,10 +1,11 @@
-export PATH="$HOME/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH";
-
 # Load the shell dotfiles, and then some:
 for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
+
+# Some CF specific stuffs that might not be safe to be public
+[ -f ".cf_bashrc" ] && source ".cf_bashrc";
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;

@@ -1,14 +1,23 @@
 #!/usr/bin/env bash
 
+export PATH="$HOME/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH:/usr/local/sbin";
+
+# Golang PATH
+export GOPATH=$HOME/projects/gopath
+export PATH="$PATH:/usr/local/opt/go/libexec/bin:$GOPATH/bin"
+
 # Make vim the default editor.
 export EDITOR='vim';
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
 
-# Increase Bash history size.
-export HISTSIZE='1000000';
-export HISTFILESIZE="${HISTSIZE}";
+# unlimited bash history
+export HISTSIZE=
+export HISTFILESIZE=
+export HISTTIMEFORMAT="[%F %T] "
+# Force prompt to write history after every command.
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # Omit duplicates and commands that begin with a space from history.
 export HISTCONTROL='ignoreboth';
 
@@ -21,3 +30,6 @@ export LESS_TERMCAP_md="${yellow}";
 
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
+
+# So gpg can read from stdin and still able to ask for passphrase
+export GPG_TTY=`tty`

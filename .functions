@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+function add-ssh-keys {
+	for file in $(ls ~/.ssh/*.id_rsa); do
+		ssh-add "$file"
+	done
+}
+
+# convert an ipv4 addr to hex
+function ip4-to-hex {
+	echo "$1" | awk -F. '{printf "%02x%02x:%02x%02x\n", $1, $2, $3, $4}'
+}
+
+function join-lines {
+    delim=${1:- }
+    paste -s -d"$delim" -
+}
+
 # Create a new directory and enter it
 function mkd() {
 	mkdir -p "$@" && cd "$_";

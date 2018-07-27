@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 export PATH="$HOME/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH:/usr/local/sbin";
+export PATH="/usr/local/opt/curl/bin:$PATH"
 
 # Golang PATH
 export GOPATH=$HOME/projects/gopath
 export PATH="$PATH:/usr/local/opt/go/libexec/bin:$GOPATH/bin"
+export PATH="/usr/local/opt/qt5/bin:$PATH"
 
 # Make vim the default editor.
 export EDITOR='vim';
@@ -16,8 +18,6 @@ export PYTHONIOENCODING='UTF-8';
 export HISTSIZE=
 export HISTFILESIZE=
 export HISTTIMEFORMAT="[%F %T] "
-# Force prompt to write history after every command.
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # Omit duplicates and commands that begin with a space from history.
 export HISTCONTROL='ignoreboth';
 

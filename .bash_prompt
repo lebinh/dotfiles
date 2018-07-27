@@ -108,8 +108,8 @@ function set_prompt_symbol () {
 		lastStatus=""
 		promptSymbol="\$"
 	else
-		lastStatus="😱"
-		promptSymbol="${red}\$${white}"
+		lastStatus="😱  "
+		promptSymbol="\[${red}\]\$\[${black}\]"
 	fi
 }
 
@@ -118,32 +118,32 @@ function set_virtualenv () {
 	if test -z "$VIRTUAL_ENV" ; then
 		pythonVenv=""
 	else
-		pythonVenv="${yellow} [`basename \"$VIRTUAL_ENV\"`]${white}"
+		pythonVenv="${yellow}\] [`basename \"$VIRTUAL_ENV\"`]${white}"
 	fi
 }
 
 function set_bash_prompt () {
-  # Update bash-history
-  history -a
-
 	# Set the promptSymbol variable. We do this first so we don't lose the
 	# return value of the last command.
 	set_prompt_symbol $?
+
+	# Update bash-history
+	history -a
 
 	# Set the pythonVenv variable.
 	set_virtualenv
 
 	# Set the terminal title and prompt.
 	PS1="\[\033]0;\W\007\]"; # working directory base name
-	PS1+="${lastStatus}";
 	PS1+="\[${bold}\]\n"; # newline
-	PS1+="\[${userStyle}\]\u"; # username
+	PS1+="\[${userStyle}\]\u "; # username
+	PS1+="${lastStatus}";
 	PS1+="${pythonVenv}";
-	PS1+="\[${white}\] in ";
+	PS1+="\[${black}\]in ";
 	PS1+="\[${green}\]\w"; # working directory full path
-	PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
+	PS1+="\$(prompt_git \"\[${black}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
 	PS1+="\n";
-	PS1+="\[${white}\]${promptSymbol} \[${reset}\]"; # `$` (and reset color)
+	PS1+="\[${black}\]${promptSymbol} \[${reset}\]"; # `$` (and reset color)
 	export PS1;
 
 	PS2="\[${yellow}\]→ \[${reset}\]";
